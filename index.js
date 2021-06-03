@@ -25,7 +25,7 @@ bot.on('message', msg => {
 		msg.reply(`Pong! Essa mensagem foi respondida em ${latencia}ms.`)
 	}
 	
-	else if (command === 'oi') {// Responde 'E aí'
+	else if (command === 'oi' || command === 'hey') {// Responde 'E aí'
 		msg.reply('E aí')
 	}
 
