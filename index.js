@@ -5,7 +5,7 @@ bot.login(token)
 
 bot.on('ready', () => {
 	console.log('Bot online')
-	bot.user.setActivity('COD Mobile', {type: 'PLAYING'})
+	bot.user.setActivity('D&D 5e', {type: 'PLAYING'})
 })
 
 bot.on('message', msg => {
@@ -29,10 +29,30 @@ bot.on('message', msg => {
 		msg.reply('E aí')
 	}
 
-	else if (command === 'jogando') {// Altera o status de jogo do bot
-		let jogo = args.join(' ')
-		bot.user.setActivity(jogo, {type: 'PLAYING'})
-		msg.reply(`Agora eu estou jogando ${jogo}`)
+	else if (command === 'status') {// Altera o status do bot
+		let tipoStatus = args[0].toLowerCase()
+		
+		if (tipoStatus === 'jogando') {
+			args.shift()
+			let jogo = args.join(' ')
+			bot.user.setActivity(jogo, {type: 'PLAYING'})
+			msg.channel.send(`Agora eu estou jogando ${jogo}`)
+		}
+		else if (tipoStatus === 'ouvindo') {
+			args.shift()
+			let musica = args.join(' ')
+			bot.user.setActivity(musica, {type: 'LISTENING'})
+			msg.channel.send(`Agora eu estou ouvindo ${musica}`)
+		}
+		else if (tipoStatus === 'assistindo') {
+			args.shift()
+			let video = args.join(' ')
+			bot.user.setActivity(video, {type: 'WATCHING'})
+			msg.channel.send(`Agora eu estou assistindo ${video}`)
+		}
+		else {
+			msg.channel.send(`Não conheço o tipo de status ${tipoStatus}`)
+		}
 	}
 
 	else {// Comando errado
