@@ -3,17 +3,15 @@ const bot = new Discord.Client()
 const {prefix, token} = require('./config.json')
 bot.login(token)
 
-bot.on('ready', () => {
+bot.once('ready', () => {
 	console.log('Bot online')
 	bot.user.setActivity('D&D 5e', {type: 'PLAYING'})
 })
 
 bot.on('message', msg => {
-	if(msg.author.bot) return
-	if(!msg.content.startsWith(prefix)) return
+	if(!msg.content.startsWith(prefix) || msg.author.bot) return
 
-	let commandBody = msg.content.slice(prefix.length)
-	let args = commandBody.split(' ')
+	let args = msg.content.slice(prefix.length).trim().split(' ')
 	let command = args.shift().toLowerCase()
 	
 	if (command === 'help') {
