@@ -22,38 +22,15 @@ bot.on('message', msg => {
 	let args = msg.content.slice(prefix.length).trim().split(' ')
 	let command = args.shift().toLowerCase()
 
-	if(!bot.commands.has(command)) return
+	if(!bot.commands.has(command)) {
+		msg.channel.send(`Não conheço o comando ${command}`)
+		return
+	}
 
-	bot.commands.get(command).execute(msg, args)
+	bot.commands.get(command).execute(msg, args, bot)
 	
 	if (command === 'help') {
 		help(msg)
-	}
-
-	else if (command === 'status') {// Altera o status do bot
-		let tipoStatus = args[0].toLowerCase()
-		
-		if (tipoStatus === 'jogando') {
-			args.shift()
-			let jogo = args.join(' ')
-			bot.user.setActivity(jogo, {type: 'PLAYING'})
-			msg.channel.send(`Agora eu estou jogando ${jogo}`)
-		}
-		else if (tipoStatus === 'ouvindo') {
-			args.shift()
-			let musica = args.join(' ')
-			bot.user.setActivity(musica, {type: 'LISTENING'})
-			msg.channel.send(`Agora eu estou ouvindo ${musica}`)
-		}
-		else if (tipoStatus === 'assistindo') {
-			args.shift()
-			let video = args.join(' ')
-			bot.user.setActivity(video, {type: 'WATCHING'})
-			msg.channel.send(`Agora eu estou assistindo ${video}`)
-		}
-		else {
-			msg.channel.send(`Não conheço o tipo de status ${tipoStatus}`)
-		}
 	}
 
 })
