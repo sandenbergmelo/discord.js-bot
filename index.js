@@ -29,10 +29,6 @@ bot.on('message', msg => {
 	if (command === 'help') {
 		help(msg)
 	}
-	
-	else if (command === 'oi' || command === 'hey') {// Responde 'E aí'
-		msg.reply('E aí')
-	}
 
 	else if (command === 'status') {// Altera o status do bot
 		let tipoStatus = args[0].toLowerCase()
