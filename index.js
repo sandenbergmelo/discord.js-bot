@@ -28,15 +28,6 @@ bot.on('message', msg => {
 	}
 
 	bot.commands.get(command).execute(msg, args, bot)
-	
-	if (command === 'help') {
-		help(msg)
-	}
-
 })
-
-function help(msg) {// Função que dispara ao digitar help
-	msg.reply('Ajuda')
-}
 
 bot.login(token)
