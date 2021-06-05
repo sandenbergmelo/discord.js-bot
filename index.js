@@ -1,7 +1,15 @@
+const fs = require('fs')
 const Discord = require('discord.js')
-const bot = new Discord.Client()
 const {prefix, token} = require('./config.json')
-bot.login(token)
+
+const bot = new Discord.Client()
+bot.commands = new Discord.Collection()
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
+
+for (let file of commandFiles) {
+	let command = require(`./commands/${file}`)
+	bot.commands.set(command.name, command)
+}
 
 bot.once('ready', () => {
 	console.log('Bot online')
@@ -13,14 +21,13 @@ bot.on('message', msg => {
 
 	let args = msg.content.slice(prefix.length).trim().split(' ')
 	let command = args.shift().toLowerCase()
+
+	if(!bot.commands.has(command)) return
+
+	bot.commands.get(command).execute(msg, args)
 	
 	if (command === 'help') {
 		help(msg)
-	}
-	
-	else if (command === 'ping') {// Mostra o latência da mensagem
-		let latencia = Date.now() - msg.createdTimestamp
-		msg.reply(`Pong! Essa mensagem foi respondida em ${latencia}ms.`)
 	}
 	
 	else if (command === 'oi' || command === 'hey') {// Responde 'E aí'
@@ -62,3 +69,5 @@ bot.on('message', msg => {
 function help(msg) {// Função que dispara ao digitar help
 	msg.reply('Ajuda')
 }
+
+bot.login(token)
