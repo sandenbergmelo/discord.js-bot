@@ -60,10 +60,6 @@ bot.on('message', msg => {
 		}
 	}
 
-	else {// Comando errado
-		msg.reply(`Não conheço o comando ${command}`)
-	}
-
 })
 
 function help(msg) {// Função que dispara ao digitar help
