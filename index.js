@@ -20,14 +20,20 @@ bot.on('message', msg => {
 	if(!msg.content.startsWith(prefix) || msg.author.bot) return
 
 	let args = msg.content.slice(prefix.length).trim().split(' ')
-	let command = args.shift().toLowerCase()
+	let commandName = args.shift().toLowerCase()
 
-	if(!bot.commands.has(command)) {
-		msg.channel.send(`Não conheço o comando ${command}`)
+	let command = bot.commands.get(commandName) || bot.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName))
+	if (!command) {
+		msg.channel.send(`Não conheço o comando ${commandName}`)
 		return
 	}
 
-	bot.commands.get(command).execute(msg, args, bot)
+	try {
+		command.execute(msg, args, bot);
+	}
+	catch(err) {
+		console.error('Erro ao chamar comando(s)')
+	}
 })
 
 bot.login(token)
