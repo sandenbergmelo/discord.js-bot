@@ -29,7 +29,7 @@ bot.on('message', msg => {
 	}
 
 	try {
-		command.execute(msg, args, bot);
+		command.execute(msg, args, bot)
 	}
 	catch(err) {
 		console.error('Erro ao chamar comando(s)')
