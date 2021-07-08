@@ -32,7 +32,8 @@ bot.on('message', msg => {
 		command.execute(msg, args, bot)
 	}
 	catch(err) {
-		console.error('Erro ao chamar comando(s)')
+		msg.channel.send('Erro ao chamar comando(s)')
+		console.error(`ERRO: ${err}`)
 	}
 })
 
