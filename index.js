@@ -1,6 +1,6 @@
-const fs = require('fs')
 const Discord = require('discord.js')
 const {prefix, token} = require('./config.json')
+const fs = require('fs')
 
 const bot = new Discord.Client()
 bot.commands = new Discord.Collection()
@@ -21,8 +21,9 @@ bot.on('message', msg => {
 
 	let args = msg.content.slice(prefix.length).trim().split(' ')
 	let commandName = args.shift().toLowerCase()
-
-	let command = bot.commands.get(commandName) || bot.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName))
+	let command = bot.commands.get(commandName)
+		|| bot.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName))
+	
 	if (!command) {
 		msg.channel.send(`Não conheço o comando ${commandName}`)
 		return
