@@ -1,6 +1,7 @@
 const Discord = require('discord.js')
 const {prefix, token} = require('./config.json')
 const fs = require('fs')
+const chalk = require('chalk')
 
 const bot = new Discord.Client()
 bot.commands = new Discord.Collection()
@@ -12,7 +13,7 @@ for (let file of commandFiles) {
 }
 
 bot.once('ready', () => {
-	console.log('Bot online')
+	console.log(`Bot ${chalk.greenBright('Online!')}`)
 	bot.user.setActivity('D&D 5e', {type: 'PLAYING'})
 })
 
@@ -34,7 +35,7 @@ bot.on('message', msg => {
 	}
 	catch(err) {
 		msg.channel.send('Erro ao chamar comando(s)')
-		console.error(`ERRO: ${err}`)
+		console.error(`${chalk.redBright('Erro: ')} ${err}`)
 	}
 })
 
