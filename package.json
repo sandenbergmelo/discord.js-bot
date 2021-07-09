@@ -9,6 +9,7 @@
   "author": "Sandenberg Ferreira Melo",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^4.1.1",
     "discloud-status": "^0.1.6",
     "discord.js": "^12.5.3"
   }
