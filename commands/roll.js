@@ -18,7 +18,7 @@ module.exports = {
 			for (let i = 0; i < quantDados; i++) {
 				roll += Math.floor(Math.random() * dado + 1)
 			}
-			return `${quantDados}d${dado} 🠒 ${roll}`
+			return `${quantDados}d${dado} \u279C \` ${roll} \``
 		}
 	}
 }
