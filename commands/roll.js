@@ -29,7 +29,7 @@ module.exports = {
 				total += roll
 				
 				if (numbers == '') {
-					numbers += `${roll}`
+					numbers = roll
 				}
 				else {
 					numbers += `, ${roll}`
