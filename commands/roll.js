@@ -3,6 +3,12 @@ module.exports = {
 	description: 'Rola dados',
 	aliases: ['r'],
 	execute(msg, args) {
+
+		if (!args[0]) {
+			msg.reply(gerarRolagem())
+			return
+		}
+
 		let valores = args.join(' ').split('d')
 		let quantDados = valores.shift()
 		let dado = valores.shift()
@@ -21,10 +27,16 @@ module.exports = {
 			for (let i = 0; i < quantDados; i++) {
 				roll = Math.floor(Math.random() * dado + 1)
 				total += roll
-				numbers += ` \` ${roll} \` `
+				
+				if (numbers == '') {
+					numbers += `${roll}`
+				}
+				else {
+					numbers += `, ${roll}`
+				}
 			}
 
-			return `${quantDados}d${dado} ${numbers} \u279C \` ${total} \``
+			return `${quantDados}d${dado} (${numbers}) \u279C \` ${total} \``
 		}
 	}
 }
