@@ -15,10 +15,16 @@ module.exports = {
 		*/ 
 		function gerarRolagem(quantDados = 1, dado = 20) {
 			let roll = 0
+			let total = 0
+			let numbers = ''
+
 			for (let i = 0; i < quantDados; i++) {
-				roll += Math.floor(Math.random() * dado + 1)
+				roll = Math.floor(Math.random() * dado + 1)
+				total += roll
+				numbers += ` \` ${roll} \` `
 			}
-			return `${quantDados}d${dado} \u279C \` ${roll} \``
+
+			return `${quantDados}d${dado} ${numbers} \u279C \` ${total} \``
 		}
 	}
 }
