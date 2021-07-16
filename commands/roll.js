@@ -36,7 +36,7 @@ module.exports = {
 				}
 			}
 
-			return `${quantDados}d${dado} (${numbers}) \u279C \` ${total} \``
+			return `\n${quantDados}d${dado} (${numbers}) \u279C \` ${total} \``
 		}
 	}
 }
