@@ -20,19 +20,16 @@ module.exports = {
 		 * @param {Number} quantDados
 		*/ 
 		function gerarRolagem(quantDados = 1, dado = 20) {
-			let roll = 0
-			let total = 0
-			const valores = []
+			const rolls = []
 
 			for (let i = 0; i < quantDados; i++) {
-				roll = Math.floor(Math.random() * dado + 1)
-				total += roll
-				
-				valores.push(roll)
+				rolls.push(Math.floor(Math.random() * dado + 1))
 			}
-			const numbers = valores.join(', ')
+			
+			const numeros = rolls.join(', ')
+			const total = rolls.reduce((total, numero) => total + numero, 0)
 
-			return `\n${quantDados}d${dado} (${numbers}) \u279C \` ${total} \``
+			return `\n${quantDados}d${dado} (${numeros}) \u279C \` ${total} \``
 		}
 	}
 }
