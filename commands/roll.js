@@ -9,9 +9,9 @@ module.exports = {
 			return
 		}
 
-		let valores = args.join(' ').split('d')
-		let quantDados = valores.shift()
-		let dado = valores.shift()
+		const valores = args.join(' ').split('d')
+		const quantDados = valores.shift()
+		const dado = valores.shift()
 
 		msg.reply(gerarRolagem(quantDados, dado))
 
@@ -22,19 +22,15 @@ module.exports = {
 		function gerarRolagem(quantDados = 1, dado = 20) {
 			let roll = 0
 			let total = 0
-			let numbers = ''
+			const valores = []
 
 			for (let i = 0; i < quantDados; i++) {
 				roll = Math.floor(Math.random() * dado + 1)
 				total += roll
 				
-				if (numbers == '') {
-					numbers = roll
-				}
-				else {
-					numbers += `, ${roll}`
-				}
+				valores.push(roll)
 			}
+			const numbers = valores.join(', ')
 
 			return `\n${quantDados}d${dado} (${numbers}) \u279C \` ${total} \``
 		}
