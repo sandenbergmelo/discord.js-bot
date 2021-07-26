@@ -4,7 +4,7 @@ module.exports = {
 	execute(msg) {
 		msg.reply(`Ping...`).then(sent => {
 			const latencia = sent.createdTimestamp - msg.createdTimestamp
-			sent.edit(`Pong! Essa mensagem foi respondida em ${latencia}ms.`)
+			sent.edit(`Pong!🏓 Essa mensagem foi respondida em ${latencia}ms.`)
 		})
 	}
 }
