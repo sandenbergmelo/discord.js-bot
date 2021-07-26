@@ -2,28 +2,32 @@ module.exports = {
 	name: 'status',
 	description: 'Muda o status do bot',
 	execute(msg, args, bot) {
-		let tipoStatus = args[0].toLowerCase()
-		
-		if (tipoStatus === 'jogando') {
+		const tipoStatus = args[0].toLowerCase()
+
+		msg.channel.send(mudarStatus(tipoStatus))
+
+		/**
+		 * @param {String} tipo 
+		 */
+		function mudarStatus(tipo) {
 			args.shift()
-			let jogo = args.join(' ')
-			bot.user.setActivity(jogo, {type: 'PLAYING'})
-			msg.channel.send(`Agora eu estou jogando ${jogo}`)
-		}
-		else if (tipoStatus === 'ouvindo') {
-			args.shift()
-			let musica = args.join(' ')
-			bot.user.setActivity(musica, {type: 'LISTENING'})
-			msg.channel.send(`Agora eu estou ouvindo ${musica}`)
-		}
-		else if (tipoStatus === 'assistindo') {
-			args.shift()
-			let video = args.join(' ')
-			bot.user.setActivity(video, {type: 'WATCHING'})
-			msg.channel.send(`Agora eu estou assistindo ${video}`)
-		}
-		else {
-			msg.channel.send(`Não conheço o tipo de status ${tipoStatus}`)
+			const conteudo = args.join(' ')
+
+			if (tipo === 'jogando') {
+				bot.user.setActivity(conteudo, {type: 'PLAYING'})
+				return `Agora eu estou jogando ${conteudo}`
+			}
+			else if (tipo === 'ouvindo') {
+				bot.user.setActivity(conteudo, {type: 'LISTENING'})
+				return `Agora eu estou ouvindo ${conteudo}`
+			}
+			else if (tipo === 'assistindo') {
+				bot.user.setActivity(conteudo, {type: 'WATCHING'})
+				return `Agora eu estou assistindo ${conteudo}`
+			}
+			else {
+				return `Não conheço o tipo de status ${tipo}`
+			}
 		}
 	}
 }
