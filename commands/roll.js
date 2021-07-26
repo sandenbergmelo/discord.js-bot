@@ -29,7 +29,7 @@ module.exports = {
 			const numeros = rolls.join(', ')
 			const total = rolls.reduce((total, numero) => total + numero, 0)
 
-			return `\n${quantDados}d${dado} (${numeros}) \u279C \` ${total} \``
+			return `\n${quantDados}d${dado} (${numeros}) ➜ \` ${total} \``
 		}
 	}
 }
