@@ -26,10 +26,10 @@ module.exports = {
 				rolls.push(Math.floor(Math.random() * dado + 1))
 			}
 			
-			const numeros = rolls.join(', ')
+			const resultados = rolls.join(', ')
 			const total = rolls.reduce((total, numero) => total + numero, 0)
 
-			return `\n${quantDados}d${dado} (${numeros}) ➜ \` ${total} \``
+			return `\n${quantDados}d${dado} (${resultados}) ➜ \` ${total} \``
 		}
 	}
 }
