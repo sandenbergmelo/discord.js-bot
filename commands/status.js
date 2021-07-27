@@ -2,17 +2,16 @@ module.exports = {
 	name: 'status',
 	description: 'Muda o status do bot',
 	execute(msg, args, bot) {
-		const tipoStatus = args[0].toLowerCase()
+		const tipoStatus = args.shift().toLowerCase()
+		const conteudo = args.join(' ')
 
-		msg.channel.send(mudarStatus(tipoStatus))
+		msg.channel.send(mudarStatus(tipoStatus, conteudo))
 
 		/**
 		 * @param {String} tipo 
 		 */
-		function mudarStatus(tipo) {
-			args.shift()
-			const conteudo = args.join(' ')
-
+		function mudarStatus(tipo, conteudo) {
+			
 			if (tipo === 'jogando') {
 				bot.user.setActivity(conteudo, {type: 'PLAYING'})
 				return `Agora eu estou jogando ${conteudo}`
