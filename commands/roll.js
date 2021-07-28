@@ -4,10 +4,7 @@ module.exports = {
 	aliases: ['r'],
 	execute(msg, args) {
 
-		if (!args[0]) {
-			msg.reply(gerarRolagem())
-			return
-		}
+		if (!args[0]) return msg.reply(gerarRolagem())
 
 		const input = args.join(' ').split('d')
 		const quantDados = input.shift()
