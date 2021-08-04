@@ -10,13 +10,27 @@ module.exports = {
 		const quantDados = input.shift()
 		const dado = input.shift()
 
+		if (dado.includes('+')) {
+			const soma = Number(dado.split('+').pop())
+			const dadoSemSoma = dado.split('+').shift()
+			msg.reply(gerarRolagem(quantDados, dadoSemSoma, soma))
+			return
+		}
+		else if (dado.includes('-')) {
+			const soma = Number(dado.split('-').pop())
+			const dadoSemSoma = dado.split('-').shift()
+			msg.reply(gerarRolagem(quantDados, dadoSemSoma, soma * (-1)))
+			return
+		}
+
 		msg.reply(gerarRolagem(quantDados, dado))
 
 		/**
 		 * @param {Number} dado 
 		 * @param {Number} quantDados
+		 * @param {Number} soma
 		*/ 
-		function gerarRolagem(quantDados = 1, dado = 20) {
+		function gerarRolagem(quantDados = 1, dado = 20, soma = 0) {
 			const rolls = []
 
 			for (let i = 1; i <= quantDados; i++) {
@@ -24,9 +38,17 @@ module.exports = {
 			}
 			
 			const resultados = rolls.join(', ')
-			const total = rolls.reduce((total, numero) => total + numero, 0)
+			const total = rolls.reduce((total, numero) => total + numero, 0) + soma
 
-			return `\n${quantDados}d${dado} (${resultados}) ➜ \` ${total} \``
+			if (soma > 0) {
+				return `\n${quantDados}d${dado} (${resultados}) + ${soma} ➜ \` ${total} \``
+			}
+			else if (soma < 0) {
+				return `\n${quantDados}d${dado} (${resultados}) - ${soma * (-1)} ➜ \` ${total} \``
+			}
+			else {
+				return `\n${quantDados}d${dado} (${resultados}) ➜ \` ${total} \``
+			}
 		}
 	}
 }
