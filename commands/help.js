@@ -1,4 +1,5 @@
 const { prefix } = require('../config.json')
+const { redBright } = require('chalk')
 
 module.exports = {
 	name: 'help',
@@ -19,7 +20,7 @@ module.exports = {
 					msg.reply('Eu mandei todos os comandos na sua DM!') 
 				})
 				.catch(err => {
-					console.error(`Não foi possível enviar mensagem para ${msg.author.tag}.\n${err}`)
+					console.error(`${redBright('Erro: ')} ${err}`)
 					msg.reply('\nNão consegui mandar os comandos na sua DM 😢, você desativou as mensagens diretas?')
 				})
 		}
