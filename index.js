@@ -20,7 +20,7 @@ bot.once('ready', () => {
 bot.on('message', msg => {
 	if(!msg.content.startsWith(prefix) || msg.author.bot) return
 
-	const args = msg.content.slice(prefix.length).trim().split(' ')
+	const args = msg.content.slice(prefix.length).trim().split(/ +/)
 	const commandName = args.shift().toLowerCase()
 	const command = bot.commands.get(commandName)
 		|| bot.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName))
