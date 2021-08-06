@@ -6,4 +6,4 @@ package-lock.json
 node_modules/
 jspm_packages/
 yarn.lock
-
+yarn-error.log
