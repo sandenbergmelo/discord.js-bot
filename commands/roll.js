@@ -10,6 +10,8 @@ module.exports = {
 		const quantDados = input.shift()
 		const dado = input.shift()
 
+		if (dado == 0 || quantDados == 0) return
+
 		if (dado.includes('+')) {
 			const soma = Number(dado.split('+').pop())
 			const dadoSemSoma = dado.split('+').shift()
