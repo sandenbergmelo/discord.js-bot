@@ -4,32 +4,39 @@ module.exports = {
 	execute(msg, args) {
 
 		if (!args[0]) {
-			return msg.channel.send(`Canal de ${criarCanal()} criado`)
+			const canal = criarCanal()
+			return msg.channel.send(`Canal de ${canal.tipo} criado`)
 		}
 
 		const tipo = args.shift().toLowerCase()
 		const nome = args.join(' ')
 
-		msg.channel.send(`Canal de ${criarCanal(tipo, nome)} "${nome}" criado`)
+		const canal = criarCanal(tipo, nome)
+		msg.channel.send(`Canal de ${canal.tipo} "${canal.nome}" criado`)
 
 		function criarCanal(tipo = 'text', nome = 'canal de texto') {
-			let retorno = ''
+			let tipoRetorno = ''
 
 			if (tipo === 'text' || tipo === 'texto') {
 				tipo = 'text'
-				retorno = 'texto'
+				tipoRetorno = 'texto'
 			}
 			else if (tipo === 'voice' || tipo === 'voz' || tipo === 'call') {
 				tipo = 'voice'
-				retorno = 'voz'
+				tipoRetorno = 'voz'
 			}
 			else {
+				nome = `${tipo} ${nome}`
 				tipo = 'text'
-				retorno = 'texto'
+				tipoRetorno = 'texto'
 			}
-			
+
 			msg.guild.channels.create(nome, { type: tipo })
-			return retorno
+
+			return {
+				nome: nome,
+				tipo: tipoRetorno
+			}
 		}
 	}
 }
