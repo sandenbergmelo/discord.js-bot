@@ -8,7 +8,8 @@ module.exports = {
 		msg.channel.send(mudarStatus(tipoStatus, conteudo))
 
 		/**
-		 * @param {String} tipo 
+		 * @param {string} tipo
+		 * @param {string} conteudo
 		 */
 		function mudarStatus(tipo, conteudo) {
 			
