@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'roll',
 	description: 'Rola dados',
-	aliases: ['r'],
+	aliases: ['r', 'dice', 'rolldice'],
 	execute(msg, args) {
 
 		if (!args[0]) return msg.reply(gerarRolagem())
