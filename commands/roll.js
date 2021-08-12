@@ -15,14 +15,12 @@ module.exports = {
 		if (dado.includes('+')) {
 			const soma = Number(dado.split('+').pop())
 			const dadoSemSoma = dado.split('+').shift()
-			msg.reply(gerarRolagem(quantDados, dadoSemSoma, soma))
-			return
+			return msg.reply(gerarRolagem(quantDados, dadoSemSoma, soma))
 		}
 		else if (dado.includes('-')) {
 			const soma = Number(dado.split('-').pop())
 			const dadoSemSoma = dado.split('-').shift()
-			msg.reply(gerarRolagem(quantDados, dadoSemSoma, soma * (-1)))
-			return
+			return msg.reply(gerarRolagem(quantDados, dadoSemSoma, soma * (-1)))
 		}
 
 		msg.reply(gerarRolagem(quantDados, dado))
