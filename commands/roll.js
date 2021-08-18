@@ -37,7 +37,16 @@ module.exports = {
 				rolls.push(Math.floor(Math.random() * dado + 1))
 			}
 			
-			const resultados = rolls.join(', ')
+			const rolagens = rolls.map(function(valor) {
+				if (valor == dado || valor == 1) {
+					return `**${valor}**`
+				}
+				else {
+					return valor
+				}
+			})
+
+			const resultados = rolagens.join(', ')
 			const total = rolls.reduce((total, numero) => total + numero, 0) + soma
 
 			if (soma > 0) {
