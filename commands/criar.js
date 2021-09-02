@@ -3,7 +3,7 @@ module.exports = {
 	description: 'Cria um canal no servidor',
 	execute(msg, args) {
 
-		if (!args[0]) {
+		if (!args.length) {
 			const canal = criarCanal()
 			return msg.channel.send(`Canal de ${canal.tipo} criado`)
 		}

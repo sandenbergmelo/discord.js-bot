@@ -4,7 +4,7 @@ module.exports = {
 	aliases: ['r', 'dice', 'rolldice'],
 	execute(msg, args) {
 
-		if (!args[0]) return msg.reply(gerarRolagem())
+		if (!args.length) return msg.reply(gerarRolagem())
 
 		const input = args.join(' ').split('d')
 		const quantDados = input.shift()
