@@ -1,8 +1,10 @@
+const { SlashCommandBuilder } = require('@discordjs/builders')
+
 module.exports = {
-	name: 'oi',
-	description: 'Responde: "E aí"',
-	aliases: ['hi', 'hey', 'hello'],
-	execute(msg) {
-		msg.reply('E aí')
-	}
+	data: new SlashCommandBuilder()
+		.setName('oi')
+		.setDescription('Responde: "E aí"'),
+	async execute(interaction) {
+		await interaction.reply('E aí')
+	},
 }

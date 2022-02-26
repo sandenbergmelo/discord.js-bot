@@ -1,39 +1,35 @@
-const Discord = require('discord.js')
-const { prefix, token } = require('./config.json')
-const fs = require('fs')
-const { greenBright, redBright } = require('chalk')
+const fs = require('node:fs')
+const { Client, Collection, Intents } = require('discord.js')
+const { token, clientId } = require('./config.json')
+const { greenBright } = require('chalk')
 
-const bot = new Discord.Client()
-bot.commands = new Discord.Collection()
+const bot = new Client({ intents: [Intents.FLAGS.GUILDS] })
+bot.commands = new Collection()
+
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
 
-commandFiles.map(file => {
+for (const file of commandFiles) {
 	const command = require(`./commands/${file}`)
-	bot.commands.set(command.name, command)
-})
+	bot.commands.set(command.data.name, command)
+}
 
 bot.once('ready', () => {
 	console.log(`Bot ${greenBright('Online!')}`)
-	bot.user.setActivity('D&D 5e', {type: 'PLAYING'})
 })
 
-bot.on('message', msg => {
-	if(!msg.content.startsWith(prefix) || msg.author.bot) return
+bot.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return
 
-	const args = msg.content.slice(prefix.length).trim().split(/ +/)
-	const commandName = args.shift().toLowerCase()
-	const command = bot.commands.get(commandName)
-		|| bot.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName))
-	
-	if (!command) return msg.channel.send(`Não conheço o comando ${commandName}`)
+	const command = bot.commands.get(interaction.commandName)
+
+	if (!command) return
 
 	try {
-		command.execute(msg, args, bot)
+		await command.execute(interaction);
+	} catch (error) {
+		console.error(error)
+		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true })
 	}
-	catch(err) {
-		console.error(`${redBright('Erro:\n')} ${err}`)
-		msg.channel.send('Erro ao chamar comando(s)')
-	}
-})
+});
 
 bot.login(token)
