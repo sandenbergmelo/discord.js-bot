@@ -49,15 +49,16 @@ module.exports = {
 			const resultados = rolagens.join(', ')
 			const total = rolls.reduce((total, numero) => total + numero, 0) + soma
 
+			let stringSoma = ''
+
 			if (soma > 0) {
-				return `\n${quantDados}d${dado} (${resultados}) + ${soma} ➜ \` ${total} \``
+				stringSoma = `+ ${soma}`
 			}
 			else if (soma < 0) {
-				return `\n${quantDados}d${dado} (${resultados}) - ${soma * (-1)} ➜ \` ${total} \``
+				stringSoma = `- ${soma * (-1)}`
 			}
-			else {
-				return `\n${quantDados}d${dado} (${resultados}) ➜ \` ${total} \``
-			}
+
+			return `\n${quantDados}d${dado} (${resultados}) ${stringSoma} ➜ \` ${total} \``
 		}
 	}
 }
